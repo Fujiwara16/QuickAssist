@@ -11,7 +11,7 @@
         android:id="@+id/card1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,8 +23,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:background="@color/blue"
             android:layout_height="wrap_content"
+            android:background="@color/black"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatButton
@@ -49,17 +49,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.258"
-                tools:context="com.abhiandroid.GoogleMaps.googlemaps.MapsActivity"
                 tools:ignore="FragmentTagUsage" />
             <!-- Title, secondary and supporting text -->
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
+
     <com.google.android.material.card.MaterialCardView
     android:id="@+id/card2"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="40dp"
+    android:layout_margin="35dp"
     android:layout_marginTop="36dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.494"
@@ -70,7 +70,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/blue"
+            android:background="@color/black"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatButton
@@ -91,7 +91,7 @@
         android:id="@+id/card3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="40dp"
+        android:layout_margin="35dp"
         android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
@@ -101,7 +101,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/blue"
+            android:background="@color/black"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatButton

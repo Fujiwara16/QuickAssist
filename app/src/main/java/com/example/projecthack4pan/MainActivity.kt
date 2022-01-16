@@ -33,17 +33,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         passTxt = findViewById(R.id.password)
         registerBtn = findViewById(R.id.register)
         loginBtn = findViewById(R.id.login)
-        initialiseFirebase()
-        val sharedPref = getSharedPreferences("loginPref",MODE_PRIVATE)
+        progressbar = findViewById(R.id.progressBar)
+        val sharedPref = getSharedPreferences("CheckLogin",Context.MODE_PRIVATE)
         emailTxt.setText(sharedPref.getString("email",""))
         passTxt.setText(sharedPref.getString("pass",""))
+        initialiseFirebase()
+
         if(emailTxt.text.toString() != "" && passTxt.text.toString() != "")
         {
             check()
         }
         registerBtn.setOnClickListener(this)
         loginBtn.setOnClickListener(this)
-        progressbar = findViewById(R.id.progressBar)
+
 
     }
     override fun onClick(view: View?) {
@@ -66,7 +68,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val emailAd = emailTxt.text.toString()
         val password = passTxt.text.toString()
 
-        val sharedPref = getSharedPreferences("loginPref", Context.MODE_PRIVATE) ?: return
+        val sharedPref = getSharedPreferences("CheckLogin", Context.MODE_PRIVATE) ?: return
         with (sharedPref.edit()) {
             putString("email",emailAd)
             putString("pass",password)
