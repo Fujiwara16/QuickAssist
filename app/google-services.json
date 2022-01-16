@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "593771793542",
+    "firebase_url": "https://quickass-default-rtdb.firebaseio.com",
+    "project_id": "quickass",
+    "storage_bucket": "quickass.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593771793542:android:e7228c2c5ecee675ff9507",
+        "android_client_info": {
+          "package_name": "com.example.projecthack4pan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "593771793542-kmbjqc6q2nqh7ujqefuq9d7k60bj0mq5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAX26cAe_JIgqtVYbVGqvEMTa_61EcwnoI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "593771793542-kmbjqc6q2nqh7ujqefuq9d7k60bj0mq5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
