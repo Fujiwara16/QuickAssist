@@ -47,7 +47,6 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_page)
-<<<<<<< HEAD
 
         btnAmenities = findViewById(R.id.amenities)
         btnDistress = findViewById(R.id.distress)
@@ -58,9 +57,6 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
         btnAmenities.setOnClickListener(this)
         btnDistress.setOnClickListener(this)
         btnVolunteer.setOnClickListener(this)
-
-=======
->>>>>>> 2f0c659d24064a6ac5ad32f4f7cf397b88b01e19
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment!!.getMapAsync(this)
@@ -89,7 +85,7 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
             .title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
-<<<<<<< HEAD
+
     private fun initialiseFirebase(){
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance()
@@ -140,6 +136,3 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
         btnAlert.startAnimation(mAnimation)
     }
 }
-=======
-}
->>>>>>> 2f0c659d24064a6ac5ad32f4f7cf397b88b01e19
