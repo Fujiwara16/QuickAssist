@@ -95,11 +95,11 @@ class Register : AppCompatActivity() {
             phone.requestFocus()
             return
         }
-        val user = hashMapOf<String,String>(
-            "Name" to locName,
-            "Email" to locEmail,
-            "PhoneNumber" to locPhone
-        )
+//        val user = hashMapOf<String,String>(
+//            "Name" to locName,
+//            "Email" to locEmail,
+//            "PhoneNumber" to locPhone
+//        )
 
         mDatabaseReference = mDatabase!!.reference.child("Users")
         progressbar.visibility = View.VISIBLE

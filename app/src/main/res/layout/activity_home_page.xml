@@ -27,7 +27,9 @@
             android:background="@color/black"
             android:orientation="vertical">
 
+            <!-- Media -->
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/volunteer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -35,9 +37,9 @@
                 android:padding="8dp"
                 android:text="@string/volunteer"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
-            <!-- Media -->
+
             <fragment
                 android:id="@+id/map"
                 android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -56,16 +58,16 @@
 
 
     <com.google.android.material.card.MaterialCardView
-    android:id="@+id/card2"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="35dp"
-    android:layout_marginTop="36dp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.494"
-    app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/card2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="35dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
 
-    app:layout_constraintTop_toBottomOf="@+id/card1">
+        app:layout_constraintTop_toBottomOf="@+id/card1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -74,6 +76,7 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/amenities"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -81,12 +84,12 @@
                 android:padding="8dp"
                 android:text="@string/search_amenities"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <!-- Title, secondary and supporting text -->
         </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
+    </com.google.android.material.card.MaterialCardView>
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card3"
         android:layout_width="match_parent"
@@ -96,7 +99,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/card2">
+        app:layout_constraintTop_toBottomOf="@+id/card2"
+        app:layout_constraintBottom_toTopOf="@id/alert">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -110,12 +114,29 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/background"
                 android:padding="8dp"
-                android:text="Raise distress signal"
+                android:text="Raise/Suspend distress signal"
+                android:id="@+id/distress"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <!-- Title, secondary and supporting text -->
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/alert"
+        android:layout_width="232dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="121dp"
+        android:background="@color/red"
+        android:textColor="@color/white"
+        android:visibility="invisible"
+        android:text="ALERT !! Distress call active"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.738"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card2"
+        app:layout_constraintVertical_bias="0.954" />
 </androidx.constraintlayout.widget.ConstraintLayout>

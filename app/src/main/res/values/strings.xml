@@ -15,4 +15,9 @@
     <string name="volunteer">Volunteer</string>
     <string name="search_amenities">Search amenities</string>
     <string name="quick_assist">Quick Assist</string>
+    <string name="police_stations">Police Stations</string>
+    <string name="hospitals">Hospitals</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_maps2">MapsActivity2</string>
+    <string name="apiFailed">Failed</string>
 </resources>
