@@ -60,8 +60,10 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
     private lateinit var userId:String
     private var mAuth: FirebaseAuth? = null
     private var counter = 0
+    private var mapCounter = 0
     private var mDatabaseReference: DatabaseReference? = null
     private var mDatabase: FirebaseDatabase? = null
+    private lateinit var distressArray:ArrayList<LatLng>
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     // globally declare LocationRequest
@@ -77,18 +79,24 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
         btnDistress = findViewById(R.id.distress)
         btnAlert = findViewById(R.id.alert)
         btnVolunteer = findViewById(R.id.volunteer)
+        distressArray = arrayListOf()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         initialiseFirebase()
-        checkDistress()
+        checkDistressUser()
         btnAmenities.setOnClickListener(this)
         btnDistress.setOnClickListener(this)
         btnVolunteer.setOnClickListener(this)
+        initialiseMap()
+    }
+
+    private fun initialiseMap() {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment!!.getMapAsync(this)
+
     }
 
-    private fun checkDistress() {
+    private fun checkDistressUser() {
         userId = mAuth!!.currentUser!!.uid
         mDatabase!!.reference.child("distress").child(userId).get().addOnSuccessListener {
           if(it.exists()){
@@ -101,15 +109,26 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
 
+        mMap = googleMap
         // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(
-            MarkerOptions()
-            .position(sydney)
-            .title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        //distressArray.add(LatLng(37.42342342342342,-122.08395287867832))
+       // Toast.makeText(this,"$mapCounter",Toast.LENGTH_SHORT).show()
+        if(mapCounter == 1)
+        {
+            for(i in distressArray) {
+                mMap.addMarker(
+                    MarkerOptions()
+                        .position(i)
+                        .title("HELP!!"))
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(i))
+            }
+
+        }
+        else if(mapCounter == 0 ) {
+            mMap.clear()
+        }
+
     }
 
     private fun initialiseFirebase(){
@@ -121,7 +140,7 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
     override fun onClick(p0: View?) {
         when(p0?.id) {
             R.id.volunteer ->{
-
+                checkDistressExist()
             }
             R.id.distress ->{
                 raiseCall()
@@ -130,6 +149,21 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
                  startActivity(Intent(this,Amenities::class.java))
             }
         }
+    }
+
+    private fun checkDistressExist() {
+        distressArray.clear()
+        mMap.clear()
+        mDatabase!!.reference.child("distress").get().addOnSuccessListener {
+            if(it.exists()){
+            for(i in it.children){
+                val lat = i.child("latitude").value.toString()
+                val long = i.child("longitude").value.toString()
+                distressArray.add(LatLng(lat.toDouble(),long.toDouble()))
+            }
+            mapCounter = 1
+            initialiseMap()
+        }}
     }
 
     private fun raiseCall() {
