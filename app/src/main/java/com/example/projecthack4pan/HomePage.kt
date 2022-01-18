@@ -40,6 +40,7 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import android.Manifest.permission
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
+import android.annotation.SuppressLint
 import android.location.Location
 
 import com.google.android.gms.tasks.OnCompleteListener
@@ -182,6 +183,7 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
 
     }
     //store latitude and longitude
+    @SuppressLint("MissingPermission")
     private fun getLocationUpdates()
     {
         val db = mDatabase!!.reference.child("distress")
