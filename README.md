@@ -13,4 +13,4 @@ The app communicates with google maps API using Volley. The database (Firebase) 
 - Volunteer to someone's call
 
 # Screenshots
-<img src="https://drive.google.com/file/d/1LtgDiYd7-CRuyztNGMNug2bQ2-0pKZDn/view?usp=sharing" width="280" height="520" alt="Login page" >  <img src="http://i.imgur.com/KmaWzNv.png" width="280" height="520"> <img src="http://i.imgur.com/hiCNNIx.png" width="280" height="520">
+<img src="https://user-images.githubusercontent.com/62954414/149896948-a8b50d60-ba09-4495-8253-b12038a79f4e.png" width="280" height="520" alt="Login page" >  <img src="http://i.imgur.com/KmaWzNv.png" width="280" height="520"> <img src="http://i.imgur.com/hiCNNIx.png" width="280" height="520">
