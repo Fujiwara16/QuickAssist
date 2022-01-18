@@ -1,15 +1,16 @@
 # QuickAssist
 # Description
-The purpose of this project is to provide an OpenMRS 2.x client for Android devices. The app is designed to cover most of the functionality currently on the web application.
-The app communicates with OpenMRS instances using REST. It supports working offline (without network connection). The database on the device is encrypted and password protected to secure patient data.
-For more information on the client, visit https://wiki.openmrs.org/display/projects/OpenMRS+2.x+Android+Client
+The purpose of this project is to provide a companion app to cater to the needs of people who need assist in any situation.
+The app would help people to quickly search for essential amenities and would link other people around them using the app and would raise an alert so that if anybody using the app wants to volunteer they can help the person in need.
+The app communicates with google maps API using Volley. The database (Firebase) on the device is encrypted and password protected to secure user's data.
 
 #### Key Features
-- Connect to OpenMRS server and sync all data
-- Register and Edit patients
-- Record Visits and Encounters
-- View patient data (Details, Diagnoses, Visits, and Vitals)
-- Offline access
+- Connect to Firebase and sync all data
+- Register users
+- Automatic sign-in
+- Searcha amenities (hospital,police stations, fuel stations, fire stations)
+- Raise distress call/alert
+- Volunteer to someone's call
 
 # Screenshots
-<img src="https://user-images.githubusercontent.com/45125121/82362785-804c2800-9a2a-11ea-9bb1-f1b778c70de5.jpg" width="280" height="520" alt="Login page" >  <img src="http://i.imgur.com/KmaWzNv.png" width="280" height="520"> <img src="http://i.imgur.com/hiCNNIx.png" width="280" height="520">
+<img src="https://drive.google.com/file/d/1LtgDiYd7-CRuyztNGMNug2bQ2-0pKZDn/view?usp=sharing" width="280" height="520" alt="Login page" >  <img src="http://i.imgur.com/KmaWzNv.png" width="280" height="520"> <img src="http://i.imgur.com/hiCNNIx.png" width="280" height="520">
