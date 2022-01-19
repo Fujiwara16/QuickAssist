@@ -16,7 +16,7 @@ I looked it up the API was asking for billing. Though it provides a $300 free cr
 - Connect to Firebase and sync all data
 - Register users
 - Automatic sign-in
-- Searcha amenities (hospital,police stations, fuel stations, fire stations)
+- Search amenities (hospital,police stations, fuel stations, fire stations)
 - Raise distress call/alert
 - Volunteer to someone's call
 
