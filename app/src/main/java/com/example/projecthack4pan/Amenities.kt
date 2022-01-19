@@ -1,5 +1,6 @@
 package com.example.projecthack4pan
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -23,9 +24,15 @@ import com.google.android.gms.common.api.GoogleApi
 import java.lang.Exception
 
 import android.app.AlertDialog
+import android.content.pm.PackageManager
+import android.location.Location
+import android.net.Uri
 import android.provider.Settings
 import android.view.View
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.google.android.gms.location.FusedLocationProviderClient
 
 
 class Amenities : AppCompatActivity(), View.OnClickListener {
@@ -35,6 +42,10 @@ class Amenities : AppCompatActivity(), View.OnClickListener {
     private lateinit var btnFire:Button
     private lateinit var btnFuel:Button
     private lateinit var btnPolice:Button
+    private var REQUEST_CODE = 1
+    private var lat:Double = 0.0
+    private var long:Double = 0.0
+    private var fusedLocationClient: FusedLocationProviderClient? = null
     private var gpsStatus: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +71,7 @@ class Amenities : AppCompatActivity(), View.OnClickListener {
 
 
 
+    @SuppressLint("MissingPermission")
     private fun checkLocationServices() {
         val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         gpsStatus = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
@@ -76,33 +88,70 @@ class Amenities : AppCompatActivity(), View.OnClickListener {
                 .setNegativeButton("Cancel", null)
                 .show()
         }
+        //checking permissions
+        if (ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED) {
+
+            // Permission is not granted
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    android.Manifest.permission.ACCESS_FINE_LOCATION)) {
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(this,
+                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                    REQUEST_CODE)
+
+                // REQUEST_CODE is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        } else {
+            // Permission has already been granted
+        }
+
+        fusedLocationClient?.lastLocation
+            ?.addOnSuccessListener { location: Location?->
+                if (location != null) {
+                    // use your location object
+                    // get latitude , longitude and other info from this
+                    //Toast.makeText(this,"working",Toast.LENGTH_SHORT).show()
+                    lat = location.latitude
+                    long = location.longitude
+                }
+
+            }
     }
 
     override fun onClick(p0: View?) {
         when(p0?.id){
             R.id.police->{
-                val intent =  Intent(this, AmenityMap::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                intent.putExtra("amenity","police")
-                startActivity(intent)
+                val gmmIntentUri = Uri.parse("geo:$lat,$long?q=Police Stations")
+                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+                startActivity(mapIntent)
             }
             R.id.fuel->{
-                val intent =  Intent(this, AmenityMap::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                intent.putExtra("amenity","fuel")
-                startActivity(intent)
+                val gmmIntentUri = Uri.parse("geo:$lat,$long?q=Fuel Stations")
+                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+                startActivity(mapIntent)
             }
             R.id.hospitals->{
-                val intent =  Intent(this, AmenityMap::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                intent.putExtra("amenity","hospitals")
-                startActivity(intent)
+                val gmmIntentUri = Uri.parse("geo:$lat,$long?q=Hospitals")
+                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+                startActivity(mapIntent)
             }
             R.id.fire->{
-                val intent =  Intent(this, AmenityMap::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                intent.putExtra("amenity","fire")
-                startActivity(intent)
+                val gmmIntentUri = Uri.parse("geo:$lat,$long?q=Fire Stations")
+                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+                startActivity(mapIntent)
             }
         }
     }

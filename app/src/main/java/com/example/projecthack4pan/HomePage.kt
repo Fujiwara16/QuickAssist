@@ -41,7 +41,10 @@ import com.google.android.gms.location.LocationServices
 import android.Manifest.permission
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.location.Location
+import android.provider.Settings
 
 import com.google.android.gms.tasks.OnCompleteListener
 
@@ -58,6 +61,8 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
     private lateinit var btnAmenities:Button
     private lateinit var btnDistress:Button
     private lateinit var btnAlert:Button
+    private lateinit var btnLogOut:Button
+    private lateinit var btnContact:Button
     private lateinit var userId:String
     private var mAuth: FirebaseAuth? = null
     private var counter = 0
@@ -76,14 +81,18 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_page)
 
+        btnLogOut = findViewById(R.id.logout)
         btnAmenities = findViewById(R.id.amenities)
         btnDistress = findViewById(R.id.distress)
         btnAlert = findViewById(R.id.alert)
         btnVolunteer = findViewById(R.id.volunteer)
+        btnContact = findViewById(R.id.contacts)
         distressArray = arrayListOf()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         initialiseFirebase()
         checkDistressUser()
+        btnLogOut.setOnClickListener(this)
+        btnContact.setOnClickListener(this)
         btnAmenities.setOnClickListener(this)
         btnDistress.setOnClickListener(this)
         btnVolunteer.setOnClickListener(this)
@@ -140,6 +149,16 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
     }
     override fun onClick(p0: View?) {
         when(p0?.id) {
+
+            R.id.logout->{
+                val sharedPref = getSharedPreferences("CheckLogin", Context.MODE_PRIVATE) ?: return
+                with (sharedPref.edit()) {
+                    putString("email","")
+                    putString("pass","")
+                    apply()
+                }
+                startActivity(Intent(this,MainActivity::class.java))
+            }
             R.id.volunteer ->{
                 checkDistressExist()
             }
@@ -149,6 +168,10 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
             R.id.amenities ->{
                  startActivity(Intent(this,Amenities::class.java))
             }
+            R.id.contacts->{
+                startActivity(Intent(this,EmergencyContact::class.java))
+            }
+
         }
     }
 
@@ -186,6 +209,22 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
     @SuppressLint("MissingPermission")
     private fun getLocationUpdates()
     {
+            val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val gpsStatus = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        if(!gpsStatus){
+                //    Toast.makeText(this,"Please enable Location ")
+                AlertDialog.Builder(this)
+                    .setMessage("Gps not enabled")
+                    .setPositiveButton("Open Settings",
+                        DialogInterface.OnClickListener { paramDialogInterface, paramInt ->
+                            this.startActivity(
+                                Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                            )
+                        })
+                    .setNegativeButton("Cancel", null)
+                    .show()
+            }
+
         val db = mDatabase!!.reference.child("distress")
         //checking permissions
         if (ContextCompat.checkSelfPermission(this,

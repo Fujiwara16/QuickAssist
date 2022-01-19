@@ -7,136 +7,85 @@
     android:background="@drawable/backgroundimage"
     tools:context=".Amenities">
 
-    <ScrollView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.198">
 
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/black"
-            android:orientation="vertical">
+            android:textSize="16sp"
+            android:padding="10dp"
+            android:text="Click on the button to search for the entitled amenity"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/police"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/background"
-                android:padding="8dp"
-                android:text="@string/police_stations"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <fragment
-                android:id="@+id/mapPolice"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="340dp"
-                android:layout_height="334dp"
-                android:layout_margin="15dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.493"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.258"
-                tools:ignore="FragmentTagUsage" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/police"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/background"
+            android:padding="8dp"
+            android:text="@string/police_stations"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/hospitals"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/background"
-                android:padding="8dp"
-                android:text="@string/hospitals"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/hospitals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/background"
+            android:padding="8dp"
+            android:text="@string/hospitals"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <fragment
-                android:id="@+id/mapHospital"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="340dp"
-                android:layout_height="334dp"
-                android:layout_margin="15dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.493"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.258"
-                tools:ignore="FragmentTagUsage" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/background"
+            android:padding="8dp"
+            android:text="Fire stations"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/fire"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/background"
-                android:padding="8dp"
-                android:text="Fire stations"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <fragment
-                android:id="@+id/mapFire"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="340dp"
-                android:layout_height="334dp"
-                android:layout_margin="15dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.493"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.258"
-                tools:ignore="FragmentTagUsage" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/fuel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/background"
-                android:padding="8dp"
-                android:text="Fuel stations"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-            <fragment
-                android:id="@+id/mapFuel"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="340dp"
-                android:layout_height="334dp"
-                android:layout_margin="15dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.493"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.258"
-                tools:ignore="FragmentTagUsage" />
-            <!-- Media -->
-
-            <!-- Title, secondary and supporting text -->
-        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fuel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/background"
+            android:padding="8dp"
+            android:text="Fuel stations"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
 
-    </ScrollView>
+        <!-- Media -->
+
+        <!-- Title, secondary and supporting text -->
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

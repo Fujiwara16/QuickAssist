@@ -55,16 +55,16 @@ class AmenityMap:AppCompatActivity() {
             while (keys.hasNext()) {
 
                 // loop to get the dynamic key
-                val state = keys.next() as String
+                val place = keys.next() as String
 
-                val confirmed = jsonObj.getJSONObject(state).getJSONObject("total")
-                    .getString("confirmed") as String
+                val confirmed = jsonObj.getJSONObject(place)
+                    .getString("latitude") as String
                 //cases  updated
-                val deceased = jsonObj.getJSONObject(state).getJSONObject("total")
-                    .getString("deceased") as String
+                val deceased = jsonObj.getJSONObject(place)
+                    .getString("longitude") as String
                 //no. of deaths
-                val rec = jsonObj.getJSONObject(state).getJSONObject("total")
-                    .getString("recovered") as String
+                val rec = jsonObj.getJSONObject(place)
+                    .getString("title") as String
                 // recovered patients
             }
         },
