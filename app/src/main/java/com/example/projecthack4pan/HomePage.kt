@@ -252,21 +252,23 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
             }
         } else {
             // Permission has already been granted
-            Toast.makeText(this,"Check",Toast.LENGTH_SHORT).show()
-
+            //Toast.makeText(this,"Check",Toast.LENGTH_SHORT).show()
         }
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location:Location?->
+                Log.i("permit Fine", ""+ ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION))
+                Log.i("permit coarse", ""+ContextCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_COARSE_LOCATION))
                 if (location != null) {
+                    //Toast.makeText(this,"Check",Toast.LENGTH_SHORT).show()
                     // use your location object
-                    // get latitude , longitude and other info from this
-
+                    // get latitude , longitude and other info from this=
                     db.child(userId).child("latitude").setValue(location.latitude)
                     db.child(userId).child("longitude").setValue(location.longitude)
 
                 }
 
             }
+
 
 
     }
