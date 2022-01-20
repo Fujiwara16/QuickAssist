@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
@@ -13,8 +14,16 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.projecthack4pan.BuildConfig.MAPS_API_KEY
+import com.google.android.gms.maps.CameraUpdateFactory
 
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
@@ -22,17 +31,25 @@ import org.json.JSONObject
 
 import java.lang.ref.WeakReference
 
-class AmenityMap:AppCompatActivity() {
-    private lateinit var txt:TextView
-    private lateinit var queue:RequestQueue
-    private lateinit var mMap: GoogleMap
+class AmenityMap:AppCompatActivity(), OnMapReadyCallback {
+    private var mAuth: FirebaseAuth? = null
+    private var counter = 0
+    private var mapCounter = 0
+    private var mDatabaseReference: DatabaseReference? = null
+    private var mDatabase: FirebaseDatabase? = null
+
+    private lateinit var distressArray:ArrayList<LatLng>
+    private var mMap: GoogleMap? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_amenity_map)
-        txt = findViewById(R.id.textView)
+        distressArray = arrayListOf()
+        initialiseMap()
+        initialiseFirebase()
+
 //        val task = async.MyAsyncTask(this)
 //        task.execute()
-        callApi()
+
 
 
 
@@ -42,37 +59,89 @@ class AmenityMap:AppCompatActivity() {
 //        mapFragment.getMapAsync(this)
     }
 
-    private fun callApi() {
-        queue = Volley.newRequestQueue(this)
-        val url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522%2C151.1957362&radius=1500&type=restaurant&keyword=cruise&key=${MAPS_API_KEY}"
-        // Request a string response from the provided URL.
-        val sr = StringRequest(
-            Request.Method.GET, url, Response.Listener { response ->
-            val jsonObj = JSONObject(response)
-            // val data: JSONObject = jsonObj.getJSONObject("AN")
-            val keys: Iterator<*> = jsonObj.keys()
-
-            while (keys.hasNext()) {
-
-                // loop to get the dynamic key
-                val place = keys.next() as String
-
-                val confirmed = jsonObj.getJSONObject(place)
-                    .getString("latitude") as String
-                //cases  updated
-                val deceased = jsonObj.getJSONObject(place)
-                    .getString("longitude") as String
-                //no. of deaths
-                val rec = jsonObj.getJSONObject(place)
-                    .getString("title") as String
-                // recovered patients
-            }
-        },
-            { getString(R.string.apiFailed) })
-
-// Add the request to the RequestQueue.
-        queue.add(sr)
+    private fun initialiseFirebase(){
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance()
+        mDatabaseReference = mDatabase!!.reference.child("Users")
+        checkDistressExist()
     }
+    private fun checkDistressExist() {
+        distressArray.clear()
+        mMap?.clear()
+        mDatabase!!.reference.child("distress").get().addOnSuccessListener {
+            if(it.exists()){
+                for(i in it.children){
+                    val lat = i.child("latitude").value.toString()
+                    val long = i.child("longitude").value.toString()
+                    distressArray.add(LatLng(lat.toDouble(),long.toDouble()))
+                }
+                mapCounter = 1
+                initialiseMap()
+            }}
+    }
+    private fun initialiseMap() {
+        val mapFragment = supportFragmentManager
+            .findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment!!.getMapAsync(this)
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+
+        mMap = googleMap
+        // Add a marker in Sydney and move the camera
+        //distressArray.add(LatLng(37.42342342342342,-122.08395287867832))
+        // Toast.makeText(this,"$mapCounter",Toast.LENGTH_SHORT).show()
+        if(mapCounter == 1)
+        {
+
+            for(i in distressArray) {
+                // Toast.makeText(this,"Distress call active",Toast.LENGTH_SHORT).show()
+                mMap!!.addMarker(
+                    MarkerOptions()
+                        .position(i)
+                        .title("HELP!!"))
+                mMap!!.moveCamera(CameraUpdateFactory.newLatLng(i))
+            }
+
+        }
+        else if(mapCounter == 0 ) {
+            mMap!!.clear()
+        }
+
+    }
+
+
+//    private fun callApi() {
+//        queue = Volley.newRequestQueue(this)
+//        val url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522%2C151.1957362&radius=1500&type=restaurant&keyword=cruise&key=${MAPS_API_KEY}"
+//        // Request a string response from the provided URL.
+//        val sr = StringRequest(
+//            Request.Method.GET, url, Response.Listener { response ->
+//            val jsonObj = JSONObject(response)
+//            // val data: JSONObject = jsonObj.getJSONObject("AN")
+//            val keys: Iterator<*> = jsonObj.keys()
+//
+//            while (keys.hasNext()) {
+//
+//                // loop to get the dynamic key
+//                val place = keys.next() as String
+//
+//                val confirmed = jsonObj.getJSONObject(place)
+//                    .getString("latitude") as String
+//                //cases  updated
+//                val deceased = jsonObj.getJSONObject(place)
+//                    .getString("longitude") as String
+//                //no. of deaths
+//                val rec = jsonObj.getJSONObject(place)
+//                    .getString("title") as String
+//                // recovered patients
+//            }
+//        },
+//            { getString(R.string.apiFailed) })
+//
+//// Add the request to the RequestQueue.
+//        queue.add(sr)
+//    }
 
 //    override fun onMapReady(googleMap: GoogleMap) {
 //        mMap = googleMap

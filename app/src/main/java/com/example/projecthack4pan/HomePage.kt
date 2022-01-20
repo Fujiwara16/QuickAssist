@@ -55,7 +55,7 @@ import androidx.core.content.ContextCompat
 
 
 class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
-    private lateinit var mMap: GoogleMap
+    private var mMap: GoogleMap? = null
 
     private lateinit var btnVolunteer:Button
     private lateinit var btnAmenities:Button
@@ -84,26 +84,26 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
         btnLogOut = findViewById(R.id.logout)
         btnAmenities = findViewById(R.id.amenities)
         btnDistress = findViewById(R.id.distress)
-
+        initialiseMap()
         btnVolunteer = findViewById(R.id.volunteer)
         btnContact = findViewById(R.id.contacts)
         distressArray = arrayListOf()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         initialiseFirebase()
         checkDistressUser()
+        checkDistressExist()
         btnLogOut.setOnClickListener(this)
         btnContact.setOnClickListener(this)
         btnAmenities.setOnClickListener(this)
         btnDistress.setOnClickListener(this)
         btnVolunteer.setOnClickListener(this)
-        initialiseMap()
+
     }
 
     private fun initialiseMap() {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment!!.getMapAsync(this)
-
     }
 
     private fun checkDistressUser() {
@@ -126,17 +126,19 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
        // Toast.makeText(this,"$mapCounter",Toast.LENGTH_SHORT).show()
         if(mapCounter == 1)
         {
+
             for(i in distressArray) {
-                mMap.addMarker(
+               // Toast.makeText(this,"Distress call active",Toast.LENGTH_SHORT).show()
+                mMap!!.addMarker(
                     MarkerOptions()
                         .position(i)
                         .title("HELP!!"))
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(i))
+                mMap!!.moveCamera(CameraUpdateFactory.newLatLng(i))
             }
 
         }
         else if(mapCounter == 0 ) {
-            mMap.clear()
+            mMap!!.clear()
         }
 
     }
@@ -160,7 +162,7 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
                 startActivity(Intent(this,MainActivity::class.java))
             }
             R.id.volunteer ->{
-                checkDistressExist()
+                startActivity(Intent(this,AmenityMap::class.java))
             }
             R.id.distress ->{
                 raiseCall()
@@ -177,7 +179,7 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
 
     private fun checkDistressExist() {
         distressArray.clear()
-        mMap.clear()
+        mMap?.clear()
         mDatabase!!.reference.child("distress").get().addOnSuccessListener {
             if(it.exists()){
             for(i in it.children){
@@ -208,7 +210,7 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
     //store latitude and longitude
     @SuppressLint("MissingPermission")
     private fun getLocationUpdates()
-    {
+    { //Toast.makeText(this,"Check",Toast.LENGTH_SHORT).show()
             val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         val gpsStatus = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
         if(!gpsStatus){
@@ -250,20 +252,22 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
             }
         } else {
             // Permission has already been granted
-        }
+            Toast.makeText(this,"Check",Toast.LENGTH_SHORT).show()
 
+        }
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location:Location?->
                 if (location != null) {
                     // use your location object
                     // get latitude , longitude and other info from this
-                    //Toast.makeText(this,"working",Toast.LENGTH_SHORT).show()
+
                     db.child(userId).child("latitude").setValue(location.latitude)
                     db.child(userId).child("longitude").setValue(location.longitude)
 
                 }
 
             }
+
 
     }
 
