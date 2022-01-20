@@ -60,7 +60,7 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
     private lateinit var btnVolunteer:Button
     private lateinit var btnAmenities:Button
     private lateinit var btnDistress:Button
-    private lateinit var btnAlert:Button
+
     private lateinit var btnLogOut:Button
     private lateinit var btnContact:Button
     private lateinit var userId:String
@@ -84,7 +84,7 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
         btnLogOut = findViewById(R.id.logout)
         btnAmenities = findViewById(R.id.amenities)
         btnDistress = findViewById(R.id.distress)
-        btnAlert = findViewById(R.id.alert)
+
         btnVolunteer = findViewById(R.id.volunteer)
         btnContact = findViewById(R.id.contacts)
         distressArray = arrayListOf()
@@ -199,8 +199,8 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
         else if(counter == 1){
             Toast.makeText(this,"Call Suspended",Toast.LENGTH_SHORT).show()
             mDatabase!!.reference.child("distress").child(userId).setValue(null)
-            btnAlert.clearAnimation()
-            btnAlert.visibility = View.INVISIBLE
+            btnDistress.clearAnimation()
+            btnDistress.text = "Raise Distress Signal"
             counter = 0
         }
 
@@ -269,12 +269,16 @@ class HomePage : AppCompatActivity(), OnMapReadyCallback, View.OnClickListener {
 
 
     private fun animateAlert() {
-        btnAlert.visibility = View.VISIBLE
         val mAnimation: Animation = AlphaAnimation(1f,0f)
         mAnimation.duration = 200
         mAnimation.interpolator = LinearInterpolator()
         mAnimation.repeatCount = Animation.INFINITE
         mAnimation.repeatMode = Animation.REVERSE
-        btnAlert.startAnimation(mAnimation)
+        btnDistress.startAnimation(mAnimation)
+        btnDistress.text = "Suspend Distress Signal"
+    }
+
+    override fun onBackPressed() {
+
     }
 }

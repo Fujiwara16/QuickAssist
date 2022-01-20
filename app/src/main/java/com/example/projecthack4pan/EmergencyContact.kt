@@ -90,7 +90,6 @@ class EmergencyContact : AppCompatActivity(), View.OnClickListener {
 //                    }
 //                }
             }
-
         }
     }
 

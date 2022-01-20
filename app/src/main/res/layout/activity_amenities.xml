@@ -4,88 +4,251 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundimage"
+    android:background="#372391"
     tools:context=".Amenities">
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.198">
+        app:layout_constraintVertical_bias="0.0">
 
-        <TextView
-            android:id="@+id/textView2"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:padding="10dp"
-            android:text="Click on the button to search for the entitled amenity"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/police"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/background"
-            android:padding="8dp"
-            android:text="@string/police_stations"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            <RelativeLayout
+                android:id="@+id/relativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="333dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/hospitals"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/background"
-            android:padding="8dp"
-            android:text="@string/hospitals"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/fire"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/background"
-            android:padding="8dp"
-            android:text="Fire stations"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+                    android:layout_above="@+id/imageView5"
+                    android:layout_alignParentStart="true"
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/fuel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/background"
-            android:padding="8dp"
-            android:text="Fuel stations"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="23dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="29dp"
+                    android:fontFamily="@font/convergence"
+                    android:gravity="center"
+                    android:text="Essential Ammenities"
+                    android:textColor="@color/white"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="233dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="12dp"
+                    android:clickable="false"
+                    android:foregroundGravity="center"
+                    android:rotation="2"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/essentialservice" />
 
 
-        <!-- Media -->
+            </RelativeLayout>
 
-        <!-- Title, secondary and supporting text -->
-    </LinearLayout>
 
+            <!-- Title, secondary and supporting text -->
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout2"
+                    android:layout_width="175dp"
+                    android:layout_height="107dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/backgroundblack"
+                    app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+                    <com.google.android.material.button.MaterialButton
+
+                        android:id="@+id/fire"
+                        style="?attr/borderlessButtonStyle"
+                        android:layout_width="129dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/convergence"
+                        android:padding="8dp"
+                        android:text="Fire stations"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="39dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="1dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_toEndOf="@+id/fire"
+                        app:srcCompat="@drawable/fire" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout3"
+                    android:layout_width="175dp"
+                    android:layout_height="107dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/backgroundblack">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/police"
+                        style="?attr/borderlessButtonStyle"
+                        android:layout_width="128dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp"
+                        android:fontFamily="@font/convergence"
+                        android:padding="8dp"
+                        android:text="@string/police_stations"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imageView7"
+                        android:layout_width="41dp"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="-3dp"
+                        android:layout_marginTop="1dp"
+
+                        android:layout_marginEnd="9dp"
+                        android:layout_marginBottom="6dp"
+                        android:layout_toEndOf="@+id/police"
+                        app:srcCompat="@drawable/police" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="127dp"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="175dp"
+                    android:layout_height="107dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/backgroundblack">
+
+
+                    <androidx.appcompat.widget.AppCompatButton
+
+                        android:id="@+id/fuel"
+                        style="?attr/borderlessButtonStyle"
+                        android:layout_width="129dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/convergence"
+                        android:padding="8dp"
+                        android:text="Fuel stations"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imageView9"
+                        android:layout_width="41dp"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="-8dp"
+                        android:layout_marginTop="-6dp"
+
+
+                        android:layout_marginEnd="7dp"
+                        android:layout_marginBottom="7dp"
+                        android:layout_toEndOf="@+id/fuel"
+                        app:srcCompat="@drawable/petrol" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="175dp"
+                    android:layout_height="107dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/backgroundblack">
+
+
+                    <androidx.appcompat.widget.AppCompatButton
+
+                        android:id="@+id/hospitals"
+                        style="?attr/borderlessButtonStyle"
+                        android:layout_width="129dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+
+                        android:fontFamily="@font/convergence"
+                        android:padding="8dp"
+                        android:text="@string/hospitals"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imageView10"
+                        android:layout_width="41dp"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="-3dp"
+                        android:layout_marginTop="1dp"
+
+                        android:layout_marginEnd="9dp"
+                        android:layout_marginBottom="6dp"
+                        android:layout_toEndOf="@+id/hospitals"
+                        app:srcCompat="@drawable/hospital" />
+
+
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

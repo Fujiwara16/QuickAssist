@@ -23,7 +23,7 @@ android {
     }
     defaultConfig {
         applicationId "com.example.projecthack4pan"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 31
         versionCode 1
         versionName "1.0"

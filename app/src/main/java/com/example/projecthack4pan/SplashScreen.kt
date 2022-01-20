@@ -78,7 +78,6 @@ class SplashScreen : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }, 1000)
-            Toast.makeText(this, "Enter all details", Toast.LENGTH_SHORT).show()
         }
     }
 }
